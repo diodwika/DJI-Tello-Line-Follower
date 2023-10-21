@@ -1,0 +1,37 @@
+# Import the Tello SDK and OpenCV
+from djitellopy import Tello
+import cv2
+
+# Create a Tello object
+tello = Tello()
+
+# Connect to the Tello
+tello.connect()
+
+# Start the video stream
+tello.streamon()
+
+# Create a VideoCapture object to read the video stream
+cap = cv2.VideoCapture('udp://0.0.0.0:11111')
+
+# Main loop to display the video feed
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    cv2.imshow("Tello Camera", frame)
+
+    # Exit the loop and close the window when the 'q' key is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Release the VideoCapture and destroy any OpenCV windows
+cap.release()
+cv2.destroyAllWindows()
+
+# Stop the video stream
+tello.streamoff()
+
+# Disconnect from the Tello
+tello.disconnect()
