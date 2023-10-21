@@ -1,0 +1,47 @@
+# Import the Tello SDK
+from djitellopy import Tello
+
+# Create a Tello object
+tello = Tello()
+
+# Connect to the Tello
+tello.connect()
+
+# Function for taking off
+def takeoff():
+    tello.takeoff()
+    
+# Function for landing
+def land():
+    tello.land()
+
+# Function to move forward
+def move_forward(distance):
+    tello.move_forward(distance)
+
+# Function to move backward
+def move_backward(distance):
+    tello.move_backward(distance)
+
+# Function to move left
+def move_left(distance):
+    tello.move_left(distance)
+
+# Function to move right
+def move_right(distance):
+    tello.move_right(distance)
+
+# Main program
+if __name__ == "__main__":
+    try:
+        takeoff()
+        move_forward(30)  # Move forward 30 cm
+        move_backward(30)  # Move backward 30 cm
+        move_left(30)  # Move left 30 cm
+        move_right(30)  # Move right 30 cm
+        land()
+    except Exception as e:
+        print(f"Error: {e}")
+    
+    # Disconnect from the Tello
+    tello.disconnect()
